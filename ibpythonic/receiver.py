@@ -94,3 +94,16 @@ class Receiver(object, metaclass=ReceiverType):
         """
         params = dict(id=id, errorCode=errorCode, errorMsg=errorMsg)
         self.dispatcher('error', params)
+    
+    @error.register(object, int, int, str, str)
+    def error_2(self, id, errorCode, errorMsg, advancedOrderRejectJson=""):
+        """ Dispatch an error given an id, code and message.
+
+        @param id error id
+        @param errorCode error code
+        @param errorMsg error message
+        @return None
+        """
+        params = dict(id=id, errorCode=errorCode, errorMsg=errorMsg)#, advancedOrderRejectJson=advancedOrderRejectJson)
+        self.dispatcher('error', params)
+        
